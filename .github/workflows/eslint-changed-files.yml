@@ -1,4 +1,4 @@
-name: Linter
+name: Eslint Changed Files
 on: pull_request
 
 jobs:
