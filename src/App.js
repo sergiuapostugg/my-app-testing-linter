@@ -9,6 +9,9 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <p className="What about new errors?">
+
+        </p>
         <a
           className='App-link'
           href='https://reactjs.org'
@@ -17,12 +20,6 @@ function App() {
         >
           Learn React
         </a>
-        <p className="Someclassname">
-          Please fail on the error above
-        </p>
-        <p className="What if I introduce other errors?">
-          No other errors here
-        </p>
       </header>
     </div>
   )
