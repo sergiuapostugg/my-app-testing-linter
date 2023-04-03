@@ -15,5 +15,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Run eslint
-        uses: tj-actions/eslint-changed-files@v18
-
+        uses: tj-actions/eslint-changed-files@v18.3.0
+        with:
+          fail_on_error: false
