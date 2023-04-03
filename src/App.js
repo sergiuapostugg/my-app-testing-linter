@@ -20,6 +20,9 @@ function App() {
         >
           Learn React
         </a>
+        <p>
+          No errors here
+        </p>
       </header>
     </div>
   )
