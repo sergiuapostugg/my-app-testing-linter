@@ -20,7 +20,7 @@ function App() {
         <p className="Someclassname">
           Please fail on the error above
         </p>
-        <p className="What if I introduce other errors?">
+        <p className='What if I introduce other errors?'>
           No other errors here
         </p>
       </header>
