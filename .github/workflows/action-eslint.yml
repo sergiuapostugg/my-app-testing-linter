@@ -17,3 +17,4 @@ jobs:
       - uses: reviewdog/action-eslint@v1.18.2
         with:
           eslint_flags: 'src/'
+          fail_on_error: true
