@@ -20,7 +20,7 @@ function App() {
         >
           Learn React
         </a>
-        <p className="Okay, I introduced some errors">
+        <p className='Okay, I introduced some errors'>
           No errors here
         </p>
       </header>
