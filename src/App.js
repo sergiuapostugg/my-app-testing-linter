@@ -17,6 +17,9 @@ function App() {
         >
           Learn React
         </a>
+        <p className="Someclassname">
+          Please fail on the error above
+        </p>
       </header>
     </div>
   )
