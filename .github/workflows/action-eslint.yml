@@ -14,6 +14,6 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install
-      - uses: reviewdog/action-eslint@v1
+      - uses: reviewdog/action-eslint@v1.18.2
         with:
           eslint_flags: 'src/'
