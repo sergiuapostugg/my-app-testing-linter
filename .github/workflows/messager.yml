@@ -7,14 +7,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Extract branch name
+        id: extract_branch
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
       - name: Create message
         run: |
           mkdir -p messages
-          echo What is: ${GITHUB_REF}
-          echo Running on branch: ${GITHUB_REF##*/}
-          echo Coverage 10 on branch ${GITHUB_REF} > messages/${GITHUB_REF##*/}.txt
+          echo Running on branch: ${{ steps.extract_branch.outputs.branch }}
+          echo Coverage 10 on branch ${{ steps.extract_branch.outputs.branch }} > messages/${{ steps.extract_branch.outputs.branch }}.txt
       - name: Upload message
         uses: actions/upload-artifact@v4
         with:
           name: my-message
-          path: messages/${GITHUB_REF##*/}.txt
+          path: messages/${{ steps.extract_branch.outputs.branch }}.txt
