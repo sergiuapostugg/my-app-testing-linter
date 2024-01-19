@@ -15,9 +15,9 @@ jobs:
         run: |
           if [ -z ${{ github.head_ref }} ]
           then
-            echo ${{ github.base_ref }} ${{ github.ref }}
+            echo ${GITHUB_REF#refs/heads/}
           else
-            echo ${{ github.head_ref }}
+            echo ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
           fi
       - name: Create message
         run: |
