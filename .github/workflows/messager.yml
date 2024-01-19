@@ -15,9 +15,9 @@ jobs:
         run: |
           mkdir -p messages
           echo Running on branch: ${{ steps.extract_branch.outputs.branch }}
-          echo Coverage 10 on branch ${{ steps.extract_branch.outputs.branch }} > messages/${{ steps.extract_branch.outputs.branch }}.txt
+          echo Coverage 10 on branch ${{ steps.extract_branch.outputs.branch }} > ${{ steps.extract_branch.outputs.branch }}.txt
       - name: Upload message
         uses: actions/upload-artifact@v4
         with:
-          name: my-message
-          path: messages/${{ steps.extract_branch.outputs.branch }}.txt
+          name: coverage-${{ steps.extract_branch.outputs.branch }}
+          path: ${{ steps.extract_branch.outputs.branch }}.txt
