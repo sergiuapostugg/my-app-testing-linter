@@ -10,10 +10,10 @@ jobs:
       - name: Create message
         run: |
           mkdir -p messages
-          echo hello > messages/m1.txt
+          echo Coverage 10 on branch ${GITHUB_REF} > messages/${GITHUB_REF##*/}.txt
           echo Running on branch: ${GITHUB_REF##*/}
       - name: Upload message
         uses: actions/upload-artifact@v4
         with:
           name: my-message
-          path: messages/m1.txt
+          path: messages/messages/${GITHUB_REF##*/}.txt
