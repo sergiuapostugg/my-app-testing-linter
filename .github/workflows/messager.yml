@@ -13,11 +13,11 @@ jobs:
         id: extract_branch
         shell: bash
         run: |
-          if [ -z ${{github.head_ref }} ]
+          if [ -z ${{ github.head_ref }} ]
           then
-            echo ${{ github.base_ref }}
+            echo ${{ github.base_ref }} ${{ github.ref }}
           else
-            echo ${{ github.head_ref}}
+            echo ${{ github.head_ref }}
           fi
       - name: Create message
         run: |
