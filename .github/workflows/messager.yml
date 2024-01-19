@@ -29,3 +29,8 @@ jobs:
         with:
           name: coverage-${{ steps.extract_branch.outputs.branch }}
           path: ${{ steps.extract_branch.outputs.branch }}.txt
+      - name: Download message
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-${{ steps.extract_branch.outputs.branch }}
+      - run: ls -R
