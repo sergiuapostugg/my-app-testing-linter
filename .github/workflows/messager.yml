@@ -40,8 +40,3 @@ jobs:
         with:
           name: coverage-${{ steps.extract_branch.outputs.branch }}
       - run: cat messages/${{ steps.extract_branch.outputs.branch }}.txt
-      - name: Download message 2
-        uses: actions/download-artifact@v4
-        with:
-          name: coverage-main
-      - run: cat messages/main.txt
