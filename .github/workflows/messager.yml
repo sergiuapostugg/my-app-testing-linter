@@ -13,16 +13,14 @@ jobs:
         id: extract_branch
         shell: bash
         run: |
-          echo ${{ github.base_ref }} == ""
-          ${{ github.base_ref }} == "" && echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
-          ${{ github.head_ref }} != "" && echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+          if [ -z ${{github.head_ref }} ]
+          then
+            echo ${{ github.base_ref }}
+          else
+            echo ${{ github.head_ref}}
+          fi
       - name: Create message
         run: |
           mkdir -p messages
           echo Running on branch: ${{ steps.extract_branch.outputs.branch }}
           echo Head commit message ${{ env.commitmsg }} > ${{ steps.extract_branch.outputs.branch }}.txt
-      - name: Upload message
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-${{ steps.extract_branch.outputs.branch }}
-          path: ${{ steps.extract_branch.outputs.branch }}.txt
