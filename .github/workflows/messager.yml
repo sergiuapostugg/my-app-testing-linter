@@ -3,6 +3,8 @@ on: push
 
 jobs:
   message:
+    env:
+      commitmsg: ${{ github.event.head_commit.message }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -15,7 +17,7 @@ jobs:
         run: |
           mkdir -p messages
           echo Running on branch: ${{ steps.extract_branch.outputs.branch }}
-          echo Coverage 10 on branch ${{ steps.extract_branch.outputs.branch }} > ${{ steps.extract_branch.outputs.branch }}.txt
+          echo Head commit message ${{ env.commitmsg }} > ${{ steps.extract_branch.outputs.branch }}.txt
       - name: Upload message
         uses: actions/upload-artifact@v4
         with:
