@@ -40,3 +40,5 @@ jobs:
         with:
           name: coverage-${{ steps.extract_branch.outputs.branch }}
       - run: cat messages/${{ steps.extract_branch.outputs.branch }}.txt
+      - name: List directory
+        run: ls -R
