@@ -3,6 +3,7 @@ on: push
 
 jobs:
   message:
+    name: 'Message'
     env:
       commitmsg: ${{ github.event.head_commit.message }}
     runs-on: ubuntu-latest
