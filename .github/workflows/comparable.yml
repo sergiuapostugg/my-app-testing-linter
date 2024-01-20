@@ -1,4 +1,4 @@
-name: Messager
+name: Comparable
 on: pull_request
 
 jobs:
@@ -14,3 +14,10 @@ jobs:
           echo ${{ github.head_ref }}
           echo ${{ github.event }}
           echo ${{ secrets.GITHUB_TOKEN }}
+      - name: Wait for messaging to succeed
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'message'
+          wait-interval: 10
+      - run: echo "Finished"
