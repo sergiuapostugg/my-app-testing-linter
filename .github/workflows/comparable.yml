@@ -26,4 +26,5 @@ jobs:
         with:
           path: messages/${{ github.head_ref }}
           key: ${{ runner.os }}-coverage-${{ github.head_ref }}
-      - run: ls -R
+      - name: List
+        run: ls -R
