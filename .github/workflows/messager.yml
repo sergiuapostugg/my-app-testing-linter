@@ -1,5 +1,5 @@
 name: Messager
-on: [push, pull_request]
+on: push
 
 jobs:
   message:
@@ -14,9 +14,9 @@ jobs:
           echo ${{ github.ref }}
           echo ${{ github.base_ref }}
           echo ${{ github.head_ref }}
-          echo ${{ github }}
+          echo ${{ github.event }}
       - name: Extract branch name
-        id: extract_branch
+        id: branch
         shell: bash
         run: |
           if [ -z ${{ github.head_ref }} ]
@@ -28,17 +28,11 @@ jobs:
       - name: Create message
         run: |
           mkdir -p messages
-          echo Running on branch: ${{ steps.extract_branch.outputs.branch }}
-          echo Head commit message "${{ env.commitmsg }}" > messages/${{ steps.extract_branch.outputs.branch }}.txt
-      - name: Upload message
-        uses: actions/upload-artifact@v4
+          echo Running on branch: ${{ steps.branch.outputs.branch }}
+          echo Commit: "${{ env.commitmsg }}" > messages/${{ steps.branch.outputs.branch }}.txt
+      - name: Cache Store
+        id: cache-coverage
+        uses: actions/cache/save@v4
         with:
-          name: coverage-${{ steps.extract_branch.outputs.branch }}
-          path: messages/${{ steps.extract_branch.outputs.branch }}.txt
-      - name: Download message
-        uses: actions/download-artifact@v4
-        with:
-          name: coverage-${{ steps.extract_branch.outputs.branch }}
-      - run: cat messages/${{ steps.extract_branch.outputs.branch }}.txt
-      - name: List directory
-        run: ls -R
+          path: messages/${{ steps.branch.outputs.branch }}.txt
+          key: ${{ runner.os }}-coverage-${{ steps.branch.outputs.branch }} 
