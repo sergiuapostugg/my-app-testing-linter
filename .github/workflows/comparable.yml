@@ -1,0 +1,30 @@
+name: Comparable
+on: pull_request
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Echo some data
+        run: |
+          echo ${{ github.ref }}
+          echo ${{ github.base_ref }}
+          echo ${{ github.head_ref }}
+          echo ${{ github.event }}
+      - name: Wait for messaging to succeed
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.head_ref }}
+          check-name: 'Message'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+      - name: Restore cached messages
+        id: cache-coverage-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: messages/${{ github.head_ref }}
+          key: ${{ runner.os }}-coverage-${{ github.head_ref }}
+      - name: List
+        run: ls -R
