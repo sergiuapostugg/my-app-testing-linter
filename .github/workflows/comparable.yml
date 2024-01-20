@@ -20,4 +20,10 @@ jobs:
           check-name: 'Message'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
-      - run: echo "Finished"
+      - name: Restore cached messages
+        id: cache-coverage-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: messages/${{ github.head_ref }}
+          key: ${{ runner.os }}-coverage-${{ github.head_ref }}
+      - run: ls -R
